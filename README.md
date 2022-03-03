@@ -1,7 +1,8 @@
 # BiometryESEO
 
-## Utiliser le workflow Git
-https://www.atlassian.com/fr/git/tutorials/comparing-workflows/gitflow-workflow
+## Guides
+- [Utilisation de Git](https://www.atlassian.com/fr/git/tutorials/comparing-workflows/gitflow-workflow)
+- [Syntaxe Markdown](https://www.markdownguide.org/basic-syntax/)
 
 ## Bibliographie
 - [Biometric Authentication: A Review (2009)](https://www.biometrie-online.net/images/stories/dossiers/generalites/International-Journal-of-u-and-e-Service-Science-and-Technology.pdf)
