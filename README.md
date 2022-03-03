@@ -1,4 +1,4 @@
 # BiometryESEO
 
-## Utiliser Git
+## Utiliser le workflow Git
 https://www.atlassian.com/fr/git/tutorials/comparing-workflows/gitflow-workflow
