@@ -20,3 +20,6 @@ Charles
 - [Thalès : la biométrie au service de l'identification](https://www.thalesgroup.com/fr/europe/france/dis/gouvernement/inspiration/biometrie)
 - [Biométrie par la main](https://www.abiova.com/biometrie)
 - [Biométrie par signaux psychologiques](https://tel.archives-ouvertes.fr/tel-00778089/document)
+
+Morjana
+- [Identification des personnes par fusion de différentes modalités biométriques (2014)](https://hal.archives-ouvertes.fr/tel-01206294/document)
