@@ -1,5 +1,38 @@
 # BiometryESEO
 
+## Mode d'emploi utilisateur 
+
+*__Initialisation :__*
+
+La première étape consiste en la prise d'une quinzaine de photo d'une main a qui on veut autorisé l'accès. 
+Renouveler l'opération autant de fois que nécessaire pour toutes les personnes à qui on autorise l'accès.
+Une fois les images prises, les stockées dans le dossier "dataset_main".
+Faire tourner l'IA, pour qu'elle puisse se réentrainer.
+
+*__Utilisation 1 (avec scanner) :__*
+
+Poser la main sur le scanner dans le sens indiqué.
+Appuyer sur le bouton "Start"
+Attendre le temps du scan
+Retirer la main et attendre le résulat.
+Si sur l'ecran s'affiche 'accès autorisé' l'accès est autorisé 
+![This is an image]()
+Si sur l'écran s'affiche 'accès refusé' l'accès est refusé (image)
+
+Pour mettre le snanner en pause appuyer sur le bouton 'pause'
+Pour annuler le processus appuyer sur "annuler".
+
+*__Utilisation 2 (sans scanner, manuellement) :__*
+
+Prendre en photo la main de la personne a qui il faut vérifier l'accès
+Mettre la photo prise dans le dossier "traitement" 
+Attendre que l'IA compare avec le dataset des mains 
+Attendre résultat 
+Si sur l'ecran s'affiche 'accès autorisé' l'accès est autorisé 
+Si sur l'écran s'affiche 'accès refusé' l'accès est refusé 
+
+
+
 ## Guides
 - [Utilisation de Git](https://www.atlassian.com/fr/git/tutorials/comparing-workflows/gitflow-workflow)
 - [Syntaxe Markdown](https://www.markdownguide.org/basic-syntax/)
