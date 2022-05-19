@@ -4,35 +4,37 @@
 
 *__Initialisation :__*
 
-1- La première étape consiste en la prise d'une quinzaine de photo d'une main a qui on veut autorisé l'accès. 
-2- Renouveler l'opération autant de fois que nécessaire pour toutes les personnes à qui on autorise l'accès.
-3- Une fois les images prises, les stockées dans le dossier "dataset_main".
-4- Faire tourner l'IA, pour qu'elle puisse se réentrainer.
+1- La première étape consiste en la prise d'une quinzaine de photo d'une main a qui on veut autorisé l'accès.  
+2- Renouveler l'opération autant de fois que nécessaire pour toutes les personnes à qui on autorise l'accès.  
+3- Une fois les images prises, les stockées dans le dossier "dataset_main".  
+4- Faire tourner l'IA, pour qu'elle puisse se réentrainer.  
+  
+  ![etape3](https://github.com/parutech/BiometryESEO/blob/main/biblioth%C3%A8que_image/notice_initialisation_md.jpg)
 
 *__Utilisation 1 (avec scanner) :__*
 
-1- Poser la main sur le scanner dans le sens indiqué.
-2- Appuyer sur le bouton "Start"
-![etape1&2]()
-Attendre le temps du scan
-Retirer la main et attendre le résulat.
-Si sur l'ecran s'affiche 'accès autorisé' l'accès est autorisé 
-Si sur l'écran s'affiche 'accès refusé' l'accès est refusé 
+1- Poser la main sur le scanner dans le sens indiqué.  
+2- Appuyer sur le bouton "Start"  
+Pour mettre le snanner en pause appuyer sur le bouton 'pause'  
+Pour annuler le processus appuyer sur "annuler"  
+![etape1&2](https://github.com/parutech/BiometryESEO/blob/main/biblioth%C3%A8que_image/notice_mainSurScan_md.jpg)  
+3- Attendre le temps du scan  
+4- Retirer la main et attendre le résulat :   
+Si sur l'ecran s'affiche 'accès autorisé' l'accès est autorisé   
+Si sur l'écran s'affiche 'accès refusé' l'accès est refusé   
 
-![This is an image](https://github.com/parutech/BiometryESEO/blob/main/r%C3%A9cup%C3%A9ration_donn%C3%A9es/autorise_Image.jpg)
-![This is an image](https://github.com/parutech/BiometryESEO/blob/main/r%C3%A9cup%C3%A9ration_donn%C3%A9es/refuse_Image.jpg)
+![This is an image](https://github.com/parutech/BiometryESEO/blob/main/biblioth%C3%A8que_image/notice_autorise_md.jpg)
+![This is an image](https://github.com/parutech/BiometryESEO/blob/main/biblioth%C3%A8que_image/notice_refuse_md.jpg)  
 
-Pour mettre le snanner en pause appuyer sur le bouton 'pause'
-Pour annuler le processus appuyer sur "annuler".
 
 *__Utilisation 2 (sans scanner, manuellement) :__*
 
-Prendre en photo la main de la personne a qui il faut vérifier l'accès
-Mettre la photo prise dans le dossier "traitement" 
-Attendre que l'IA compare avec le dataset des mains 
-Attendre résultat 
-Si sur l'ecran s'affiche 'accès autorisé' l'accès est autorisé 
-Si sur l'écran s'affiche 'accès refusé' l'accès est refusé 
+Prendre en photo la main de la personne a qui il faut vérifier l'accès  
+Mettre la photo prise dans le dossier "traitement"   
+Attendre que l'IA compare avec le dataset des mains   
+Attendre résultat  
+Si sur l'ecran s'affiche 'accès autorisé' l'accès est autorisé  
+Si sur l'écran s'affiche 'accès refusé' l'accès est refusé  
 
 
 
