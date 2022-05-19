@@ -4,15 +4,16 @@
 
 *__Initialisation :__*
 
-La première étape consiste en la prise d'une quinzaine de photo d'une main a qui on veut autorisé l'accès. 
-Renouveler l'opération autant de fois que nécessaire pour toutes les personnes à qui on autorise l'accès.
-Une fois les images prises, les stockées dans le dossier "dataset_main".
-Faire tourner l'IA, pour qu'elle puisse se réentrainer.
+1- La première étape consiste en la prise d'une quinzaine de photo d'une main a qui on veut autorisé l'accès. 
+2- Renouveler l'opération autant de fois que nécessaire pour toutes les personnes à qui on autorise l'accès.
+3- Une fois les images prises, les stockées dans le dossier "dataset_main".
+4- Faire tourner l'IA, pour qu'elle puisse se réentrainer.
 
 *__Utilisation 1 (avec scanner) :__*
 
-Poser la main sur le scanner dans le sens indiqué.
-Appuyer sur le bouton "Start"
+1- Poser la main sur le scanner dans le sens indiqué.
+2- Appuyer sur le bouton "Start"
+![etape1&2]()
 Attendre le temps du scan
 Retirer la main et attendre le résulat.
 Si sur l'ecran s'affiche 'accès autorisé' l'accès est autorisé 
