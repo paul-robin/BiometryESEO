@@ -16,7 +16,10 @@ Appuyer sur le bouton "Start"
 Attendre le temps du scan
 Retirer la main et attendre le résulat.
 Si sur l'ecran s'affiche 'accès autorisé' l'accès est autorisé 
-![This is an image]()
+![This is an image](https://github.com/parutech/BiometryESEO/blob/main/r%C3%A9cup%C3%A9ration_donn%C3%A9es/autorise.jpg)
+
+
+
 Si sur l'écran s'affiche 'accès refusé' l'accès est refusé (image)
 
 Pour mettre le snanner en pause appuyer sur le bouton 'pause'
