@@ -1,15 +1,45 @@
 # BiometryESEO
 
-## Mode d'emploi utilisateur 
-
-*__Initialisation :__*
-
-1- La première étape consiste en la prise d'une quinzaine de photo d'une main a qui on veut autorisé l'accès.  
-2- Renouveler l'opération autant de fois que nécessaire pour toutes les personnes à qui on autorise l'accès.  
-3- Une fois les images prises, les stockées dans le dossier "dataset_main".  
-4- Faire tourner l'IA, pour qu'elle puisse se réentrainer.  
+## Principe de la technologie utilisée et Fonctionnement  
   
-  ![etape3](https://github.com/parutech/BiometryESEO/blob/main/biblioth%C3%A8que_image/notice_initialisation_md.jpg)
+*__Définition d'un réseau de neurones__*  
+Un réseau de neuronne est un système informatique s'inspirant du fonctionnement du cerveau humain pour apprendre.  
+
+*__Fonctionnement Général__*  
+Il s'agit d'un ensemble de neuronne virtels, disposé en réseaux virtuels.  
+Chaque neurone est un point du réseau qui recoit de l'information entrante et emet de l'information sortante.  
+Les informations qui circulent sont élementaires et sont des intensités de signaux.  
+Certains neurones sont en charge de capter les données extérieurs (les données brutes), il s'agit de la 1ère couche de neurone : Input Layer.  
+Les neurones de la 1ère couche vont lire ces données brutes et va s'activer si son morceau de données brute correspond à son activation.  
+Cette activation va envoyer des signaux via les connexions (les synapses) aux neurones de la 2ème couche. Les couches intermédiaires se nomment Hidden Layer.  
+Les neurones de la 2ème couche vont diviser les signaux en 2 catégories en fonction de la nature des synapses qui peuvent être des synapes (très) activatrices, ou des synapses (très) inhibitrices. Un signal est donc très activateur si ce signal passe par une synapse très activatrice ET si ce signal est d'une forte intensité (= a un grand nombre).  
+Le neurone de la 2ème couche va sommer les contributions des signaux activateurs et inhibiteurs et va ensuite ajouter son propre biais. Le neurone s'activera si les signaux activateurs + biais activateur sont plus important que les signaux inhibiteurs + biais inhibiteurs.  
+On les appelle les Réseaux de neurone ReLU (Rectifier Linear Unit). Il en existe d'autres...  
+De facon général les neurones de toutes les couches intermédiaires (Hidden Layer) collectent des contributions activatrices et inhibitrices et y ajoute un biais, puis calcule le niveau d'activation en fonction de leur résultat et d'une fonction d'activation.  
+  
+    
+    
+    Schéma  
+    
+    
+    
+*__Notre utilisation__*  
+Nous utiliserons le principe de Deep Learning. Il s'agit d'une forme d'Intelligence Artificielle (= ensemble de techniques dont le but est d'imiter une forme d'intelligence à travers une succession de règles). Ce qui caractérise le Deep Learning c'est le fait qu'on lui donne un but à accomplir et apprendre de lui-même comment l'atteindre. Il faut donc pour cela, utilisé les réseaux de neurones.  
+Dans notre cas, il faut fournir un très grand nombre d'exemple d'images de mains différentes (entre 5000 et 6000 images) à un réseau de neurones, suffisement pour qu'il puisse de lui-même apprendre comment s'adapter à notre problème. Au fur et à mesure l'IA saura détecter correctement les images semblables.  
+Comme expliqué précedement, nous voulons que notre IA reconnaisse certaines images de mains. Il faut donc donner aux Input Layer des images sous forme de chiffre pour qu'ils puissent les traiter. Pour ce faire, nos images sont en 500x500 pixels et chaque pixel est représenté par une valeur entre 0 et 1 selon l'intensité de couleur/lumière. On a donc un total de 250 000 neurones d'entrées qu'on donnera aux Input Layer.  
+Cette information va se propager d'une couche à l'autre. Chaque neurone des couches intermédiaires prenant une valeur numérique, dépendent de toutes les connexions (synapses) entrantes et de leur poids associé, qui défini son niveau d'activation, pour finalement nous renvoyer un résultat avec l'output layer.  
+Nous avons plusieurs neurones en sortie, chacun correspondant à des images de mains différentes. Le degré d'activation de chacun des neurones finaux représente le pourcentage de chance que notre image du départ corresponde à une autre image de mains d'après notre réseau.  
+Lors des premières utilisations du réseau de neurone, il y a peu de chance qu'il arrive à trouver la bonne correspondance d'image. Il faut donc lui apprendre son erreur et pour ce faire, on va comparer le résultat qui nous est donné avec celui qu'on attendait de lui. On aura donc un coût : plus le coût est grand, plus notre réseau est éloigné du résultat. On pourra donc savoir quel poids (des connexions) à le plus participer à cette erreur. Il faut donc faire cette opération un très grand nombre de fois aves des images d'entrées différentes : c'est le principe de l'apprentissage.  
+Enfin au fur et à mesure, notre IA arrivera à nous donner des résultats correctes. 
+
+*__Les 3 couches que nous utilisons__*  
+
+
+
+
+
+
+## Mode d'emploi utilisateur 
 
 *__Utilisation 1 (avec scanner) :__*
 
@@ -29,13 +59,21 @@ Si sur l'écran s'affiche 'accès refusé' l'accès est refusé
 
 *__Utilisation 2 (sans scanner, manuellement) :__*
 
-Prendre en photo la main de la personne a qui il faut vérifier l'accès  
-Mettre la photo prise dans le dossier "traitement"   
-Attendre que l'IA compare avec le dataset des mains   
-Attendre résultat  
+1- Prendre en photo la main de la personne a qui il faut vérifier l'accès  
+2- Mettre la photo prise dans le dossier "traitement"   
+3- Attendre que l'IA compare avec le dataset des mains   
+4- Attendre résultat :   
 Si sur l'ecran s'affiche 'accès autorisé' l'accès est autorisé  
 Si sur l'écran s'affiche 'accès refusé' l'accès est refusé  
 
+*__Initialisation :__*
+
+1- La première étape consiste en la prise d'une quinzaine de photo d'une main a qui on veut autorisé l'accès.  
+2- Renouveler l'opération autant de fois que nécessaire pour toutes les personnes à qui on autorise l'accès.  
+3- Une fois les images prises, les stockées dans le dossier "dataset_main".  
+4- Faire tourner l'IA, pour qu'elle puisse se réentrainer.  
+  
+  ![etape3](https://github.com/parutech/BiometryESEO/blob/main/biblioth%C3%A8que_image/notice_initialisation_md.jpg)
 
 
 ## Guides
