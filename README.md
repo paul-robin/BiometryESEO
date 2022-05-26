@@ -17,11 +17,7 @@ Le neurone de la 2ème couche va sommer les contributions des signaux activateur
 On les appelle les Réseaux de neurone ReLU (Rectifier Linear Unit). Il en existe d'autres...  
 De facon général les neurones de toutes les couches intermédiaires (Hidden Layer) collectent des contributions activatrices et inhibitrices et y ajoute un biais, puis calcule le niveau d'activation en fonction de leur résultat et d'une fonction d'activation.  
   
-    
-    
-    Schéma  
-    
-    
+![neurone](https://github.com/parutech/BiometryESEO/blob/main/biblioth%C3%A8que_image/neurone.jpg)
     
 *__Notre utilisation__*  
 Nous utiliserons le principe de Deep Learning. Il s'agit d'une forme d'Intelligence Artificielle (= ensemble de techniques dont le but est d'imiter une forme d'intelligence à travers une succession de règles). Ce qui caractérise le Deep Learning c'est le fait qu'on lui donne un but à accomplir et apprendre de lui-même comment l'atteindre. Il faut donc pour cela, utilisé les réseaux de neurones.  
@@ -29,6 +25,8 @@ Dans notre cas, il faut fournir un très grand nombre d'exemple d'images de main
 Comme expliqué précedement, nous voulons que notre IA reconnaisse certaines images de mains. Il faut donc donner aux Input Layer des images sous forme de chiffre pour qu'ils puissent les traiter. Pour ce faire, nos images sont en 500x500 pixels et chaque pixel est représenté par une valeur entre 0 et 1 selon l'intensité de couleur/lumière. On a donc un total de 250 000 neurones d'entrées qu'on donnera aux Input Layer.  
 Cette information va se propager d'une couche à l'autre. Chaque neurone des couches intermédiaires prenant une valeur numérique, dépendent de toutes les connexions (synapses) entrantes et de leur poids associé, qui défini son niveau d'activation, pour finalement nous renvoyer un résultat avec l'output layer.  
 Nous avons plusieurs neurones en sortie, chacun correspondant à des images de mains différentes. Le degré d'activation de chacun des neurones finaux représente le pourcentage de chance que notre image du départ corresponde à une autre image de mains d'après notre réseau.  
+Voici un exemple de représentation des neurones output layer :  
+![output](https://github.com/parutech/BiometryESEO/blob/main/biblioth%C3%A8que_image/neurone1.jpg)  
 Lors des premières utilisations du réseau de neurone, il y a peu de chance qu'il arrive à trouver la bonne correspondance d'image. Il faut donc lui apprendre son erreur et pour ce faire, on va comparer le résultat qui nous est donné avec celui qu'on attendait de lui. On aura donc un coût : plus le coût est grand, plus notre réseau est éloigné du résultat. On pourra donc savoir quel poids (des connexions) à le plus participer à cette erreur. Il faut donc faire cette opération un très grand nombre de fois aves des images d'entrées différentes : c'est le principe de l'apprentissage.  
 Enfin au fur et à mesure, notre IA arrivera à nous donner des résultats correctes. 
 
