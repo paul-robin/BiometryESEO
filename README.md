@@ -103,7 +103,7 @@ __1) Conv2D__
 Cette couche crée un noyau de convolution qui est mis en convolution avec l'entrée de la couche pour produire un tenseur de sorties.
 Ci dessous, les arguments que prend cette classe :
   
-  - [Conv2D](https://github.com/parutech/BiometryESEO/blob/main/biblioth%C3%A8que_image/con2D.jpg)
+  ![Conv2D](https://github.com/parutech/BiometryESEO/blob/main/biblioth%C3%A8que_image/con2D.jpg)
 
 Les Formes d'entrées :  
 Tenseur 4+D de forme : batch_shape + (channels, rows, cols)if data_format='channels_first' ou  
@@ -123,7 +123,7 @@ __2)MaxPooling2D__
 Cette couche sous-échantillonne l'entrée selon ses dimensions spatiales (hauteur et largeur) en prenant la valeur maximale sur une fenêtre d'entrée (de taille définie par pool_size) pour chaque canal de l'entrée. La fenêtre est décalée de stridesle long de chaque dimension.  
   
 Elle prend en argument :  
-  - [maxpooling](https://github.com/parutech/BiometryESEO/blob/main/biblioth%C3%A8que_image/MaxPooling.jpg)  
+  ![maxpooling](https://github.com/parutech/BiometryESEO/blob/main/biblioth%C3%A8que_image/MaxPooling.jpg)  
   
 pool_size : entier ou tuple de 2 entiers, taille de fenêtre sur laquelle prendre le maximum. (2, 2)prendra la valeur maximale sur une fenêtre de regroupement 2x2. Si un seul entier est spécifié, la même longueur de fenêtre sera utilisée pour les deux dimensions.  
   
