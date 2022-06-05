@@ -6,7 +6,7 @@
 Un réseau de neuronne est un système informatique s'inspirant du fonctionnement du cerveau humain pour apprendre.  
 
 *__Fonctionnement Général__*  
-Il s'agit d'un ensemble de neuronne virtels, disposé en réseaux virtuels.  
+Il s'agit d'un ensemble de neuronne virtuels, disposé en réseaux virtuels.  
 Chaque neurone est un point du réseau qui recoit de l'information entrante et emet de l'information sortante.  
 Les informations qui circulent sont élementaires et sont des intensités de signaux.  
 Certains neurones sont en charge de capter les données extérieurs (les données brutes), il s'agit de la 1ère couche de neurone : Input Layer.  
