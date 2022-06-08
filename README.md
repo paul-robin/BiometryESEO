@@ -111,7 +111,7 @@ Chacune de ces images donnera un résultat
 Ce résultat est  une triple valeur de pertes  
 Le but étant que le résultat final soit plus proche pour l’image de référence et l’image altérée et plus éloigné pour l’image différente.  
   
- ![image CNN]() 
+ ![image CNN](https://github.com/parutech/BiometryESEO/blob/main/biblioth%C3%A8que_image/Image1CNN.jpg) 
   
 Ci dessous, les arguments que prend cette classe :
   
