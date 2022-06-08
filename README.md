@@ -22,18 +22,21 @@ De facon général les neurones de toutes les couches intermédiaires (Hidden La
 *__Notre utilisation__*  
 Nous utiliserons le principe de Deep Learning. Il s'agit d'une forme d'Intelligence Artificielle (= ensemble de techniques dont le but est d'imiter une forme d'intelligence à travers une succession de règles). Ce qui caractérise le Deep Learning c'est le fait qu'on lui donne un but à accomplir et apprendre de lui-même comment l'atteindre. Il faut donc pour cela, utilisé les réseaux de neurones.  
 Dans notre cas, il faut fournir un très grand nombre d'exemple d'images de mains différentes (entre 5000 et 6000 images) à un réseau de neurones, suffisement pour qu'il puisse de lui-même apprendre comment s'adapter à notre problème. Au fur et à mesure l'IA saura détecter correctement les images semblables.  
-Comme expliqué précedement, nous voulons que notre IA reconnaisse certaines images de mains. Il faut donc donner aux Input Layer des images sous forme de chiffre pour qu'ils puissent les traiter. Pour ce faire, nos images sont en 500x500 pixels et chaque pixel est représenté par une valeur entre 0 et 1 selon l'intensité de couleur/lumière. On a donc un total de 250 000 neurones d'entrées qu'on donnera aux Input Layer.  
+Il faut donc donner aux Input Layer des images sous forme de chiffre pour qu'ils puissent les traiter. Pour ce faire, nos images sont en 500x500 pixels et chaque pixel est représenté par une valeur entre 0 et 1 selon l'intensité de couleur/lumière. On a donc un total de 250 000 neurones d'entrées qu'on donnera aux Input Layer.  
 Cette information va se propager d'une couche à l'autre. Chaque neurone des couches intermédiaires prenant une valeur numérique, dépendent de toutes les connexions (synapses) entrantes et de leur poids associé, qui défini son niveau d'activation, pour finalement nous renvoyer un résultat avec l'output layer.  
 Nous avons plusieurs neurones en sortie, chacun correspondant à des images de mains différentes. Le degré d'activation de chacun des neurones finaux représente le pourcentage de chance que notre image du départ corresponde à une autre image de mains d'après notre réseau.  
 Voici un exemple de représentation des neurones output layer :  
 ![output](https://github.com/parutech/BiometryESEO/blob/main/biblioth%C3%A8que_image/neurone1.jpg)  
 Lors des premières utilisations du réseau de neurone, il y a peu de chance qu'il arrive à trouver la bonne correspondance d'image. Il faut donc lui apprendre son erreur et pour ce faire, on va comparer le résultat qui nous est donné avec celui qu'on attendait de lui. On aura donc un coût : plus le coût est grand, plus notre réseau est éloigné du résultat. On pourra donc savoir quel poids (des connexions) à le plus participer à cette erreur. Il faut donc faire cette opération un très grand nombre de fois aves des images d'entrées différentes : c'est le principe de l'apprentissage.  
-Enfin au fur et à mesure, notre IA arrivera à nous donner des résultats correctes. 
+Enfin au fur et à mesure, notre IA arrivera à nous donner des résultats correctes.  
+Notre IA ne sera pas entrainée à reconnaitre les images a partir d’un dataset  
+Elle sera entrainée à comparer des images entre elles grâce au dataset.  
+Avantage : pas d’obligation de réentraîner l’IA a chaque fois que des images entrent dans le dataset  
+Notre IA ne sera pas entrainée à reconnaitre les images a partir d’un dataset. Elle sera entrainée à comparer des images entre elles grâce au dataset.  
+L'avantage : pas d’obligation de réentraîner l’IA a chaque fois que des images entrent dans le dataset  
 
-*__Les 3 couches que nous utilisons__*  
 
-
-
+ 
 
 
 
@@ -100,7 +103,16 @@ Pour rendre plus concret l’action du Max-Pooling, voici un exemple : imaginons
 Nous utilisons pour notre code la bibliothèque Keras. Avec la couche Conv2D, MaxPooling2D et substract.
   
 __1) Conv2D__  
-Cette couche crée un noyau de convolution qui est mis en convolution avec l'entrée de la couche pour produire un tenseur de sorties.
+Cette couche crée un noyau de convolution qui est mis en convolution avec l'entrée de la couche pour produire un tenseur de sorties.  
+  
+  Notre utilisation de la Convolution :  
+1 image de référence, 1 même image mais altérée et 1 image différente seront transmises sur les 3 mêmes réseaux neuronaux.  
+Chacune de ces images donnera un résultat  
+Ce résultat est  une triple valeur de pertes  
+Le but étant que le résultat final soit plus proche pour l’image de référence et l’image altérée et plus éloigné pour l’image différente.  
+  
+ ![image CNN]() 
+  
 Ci dessous, les arguments que prend cette classe :
   
   ![Conv2D](https://github.com/parutech/BiometryESEO/blob/main/biblioth%C3%A8que_image/con2D.jpg)
@@ -121,6 +133,8 @@ Un tenseur de rang 4+ représentant activation(conv2d(inputs, kernel) + bias).
 __2)MaxPooling2D__  
   
 Cette couche sous-échantillonne l'entrée selon ses dimensions spatiales (hauteur et largeur) en prenant la valeur maximale sur une fenêtre d'entrée (de taille définie par pool_size) pour chaque canal de l'entrée. La fenêtre est décalée de stridesle long de chaque dimension.  
+Max Pooling Layer nous servira à généraliser les images pour qu’on puisse inhiber les bruits de l’image.
+
   
 Elle prend en argument :  
   ![maxpooling](https://github.com/parutech/BiometryESEO/blob/main/biblioth%C3%A8que_image/MaxPooling.jpg)  
