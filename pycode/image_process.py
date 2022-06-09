@@ -6,6 +6,7 @@ import numpy as np
 from random import random
 
 basePath = os.getcwd() + "\\bases_mains"
+authPath = os.getcwd() + "\\auth_mains"
 finalPath = os.getcwd() + "\\dataset_mains"
 files = [f for f in listdir(basePath) if isfile(join(basePath, f))]
 
@@ -22,6 +23,7 @@ for i in range(len(files)):
     ridges = cv2.resize(ridges, (128, 128))
 
     cv2.imwrite(finalPath + "\\" + str(i) + "_0.jpg", ridges)
+    cv2.imwrite(authPath + "\\" + str(i) + ".jpg", ridges)
 
 
 for i in range(len(files)):
@@ -52,8 +54,6 @@ for i in range(len(files)):
         ridge_filter = cv2.ximgproc.RidgeDetectionFilter_create()
         ridges = ridge_filter.getRidgeFilteredImage(gray)
         ridges = cv2.bitwise_not(ridges)
-
-        ridges = cv2.resize(ridges, (128, 128))
 
         cv2.imwrite(finalPath + "\\" + str(i) + "_" + str(j) + ".jpg", ridges)
 
