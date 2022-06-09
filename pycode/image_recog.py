@@ -219,60 +219,6 @@ def compute_dist(a,b):
 #Data Validation :
 
 
-def compute_probs(network,X,Y):
-    '''
-    Input
-        network : current NN to compute embeddings
-        X : tensor of shape (m,w,h,3) containing pics to evaluate
-        Y : tensor of shape (m,) containing true class
-        
-    Returns
-        probs : array of shape (m,m) containing distances
-    
-    '''
-    m = X.shape[0]
-    nbevaluation = int(m*(m-1)/2)
-    probs = np.zeros((nbevaluation))
-    y = np.zeros((nbevaluation))
-    
-    #Compute all embeddings for all pics with current network
-    embeddings = network.predict(X)
-    
-    size_embedding = embeddings.shape[1]
-    
-    #For each pics of our dataset
-    k = 0
-    for i in range(m):
-            #Against all other images
-            for j in range(i+1,m):
-                #compute the probability of being the right decision : it should be 1 for right class, 0 for all other classes
-                probs[k] = -compute_dist(embeddings[i,:],embeddings[j,:])
-                if (Y[i]==Y[j]):
-                    y[k] = 1
-                    #print("{3}:{0} vs {1} : {2}\tSAME".format(i,j,probs[k],k))
-                else:
-                    y[k] = 0
-                    #print("{3}:{0} vs {1} : \t\t\t{2}\tDIFF".format(i,j,probs[k],k))
-                k += 1
-    return probs,y
-
-
-def compute_metrics(probs,yprobs):
-    '''
-    Returns
-        fpr : Increasing false positive rates such that element i is the false positive rate of predictions with score >= thresholds[i]
-        tpr : Increasing true positive rates such that element i is the true positive rate of predictions with score >= thresholds[i].
-        thresholds : Decreasing thresholds on the decision function used to compute fpr and tpr. thresholds[0] represents no instances being predicted and is arbitrarily set to max(y_score) + 1
-        auc : Area Under the ROC Curve metric
-    '''
-    # calculate AUC
-    auc = roc_auc_score(yprobs, probs)
-    # calculate roc curve
-    fpr, tpr, thresholds = roc_curve(yprobs, probs)
-    
-    return fpr, tpr, thresholds,auc
-
-
 def verify(image_path, identity, database, model):
     """
     Function that verifies if the person on the "image_path" image is "identity".
@@ -332,8 +278,10 @@ plot_model(network_train,show_shapes=True, show_layer_names=True, to_file='02 mo
 print(network_train.metrics_names)
 
 n_iteration=0
-#network_train.load_weights("fv_DB1_A_weightes.h5")
+network_train.load_weights("saved_weights.h5")
 
+
+#-----------------START TRAINING-----------------#
 triplets = get_batch_random(3)
 hardtriplets = get_batch_hard(50,1,1,FRmodel)
 
@@ -344,13 +292,11 @@ drawTriplets(triplets)
 print("Shapes in the hardbatch A:{0} P:{1} N:{2}".format(hardtriplets[0].shape, hardtriplets[1].shape, hardtriplets[2].shape))
 drawTriplets(hardtriplets)
 
-evaluate_every = 25 # interval for evaluating on one-shot tasks
+evaluate_every = 50 # interval for evaluating on one-shot tasks
 batch_size = 50
-n_iter = 500 # No. of training iterations
-#n_val = 250 # how many one-shot tasks to validate on
+n_iter = 1000 # No. of training iterations
 
-print("Starting training process!")
-print("-------------------------------------")
+print("------------ Training process ------------")
 
 t_start = time.time()
 dummy_target = [np.zeros((batch_size,15)) for i in range(3)]
@@ -360,10 +306,10 @@ for i in range(1, n_iter+1):
     n_iteration += 1
     if i % evaluate_every == 0:
         print("[{3}] Time for {0} iterations: {1:.1f} mins, Train Loss: {2}".format(i, (time.time()-t_start)/60.0,loss,n_iteration))
-        #probs,yprob = compute_probs(FRmodel,x_test_origin[:n_val,:,:,:],y_test_origin[:n_val])
-        #fpr, tpr, thresholds, auc = compute_metrics(probs,yprob)
 
-network_train.save_weights("fv_DB1_A_weightes.h5")
+network_train.save_weights("saved_weights.h5")
+#-----------------END TRAINING-----------------#
+
 
 database = {}
 for i in y_test:
@@ -373,28 +319,29 @@ print("\n------------ Positive match test ------------")
 positiveTestsCount = 0
 falseNegatives = 0
 for j in range(nb_classes):
-    for i in [1, 10, 15, 19]:
+    for i in range(1, 20, 2):
         positiveTestsCount += 1
         dist, result = verify(dataPath + y_test[j]+'_'+str(i)+'.jpg', y_test[j], database, FRmodel)
         print((dist, result))
         if(result == False):
             falseNegatives += 1
-print("\nTest accuracy = ", 100-(falseNegatives/positiveTestsCount)*100, "%")
 
 print("\n------------ Negative match test ------------")
 negativeTestsCount = 0
 falsePositives = 0
 for j in range(nb_classes):
-    for i in [1, 10, 15, 19]:
+    for i in range(1, 20, 2):
         negativeTestsCount += 1
         dist, result = verify(dataPath + y_test[j]+'_'+str(i)+'.jpg', y_test[j-1], database, FRmodel)
         print((dist, result))
         if(result == True):
             falsePositives += 1
-print("\nTest accuracy = ", 100-(falsePositives/negativeTestsCount)*100, "%")
 
 print("\n------------ Final results ------------")
 totalTestsCount = positiveTestsCount + negativeTestsCount
 totalFalseFlags = falseNegatives + falsePositives
+
+print("Positive match test accuracy = ", 100-(falseNegatives/positiveTestsCount)*100, "%")
+print("Negative match test accuracy = ", 100-(falsePositives/negativeTestsCount)*100, "%")
 print("Total accuracy = ", 100-(totalFalseFlags/totalTestsCount)*100, "%")
 
