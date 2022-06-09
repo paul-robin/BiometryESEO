@@ -369,7 +369,7 @@ database = {}
 for i in y_test:
     database[i] = img_to_encoding(dataPath+i+'_2.jpg',FRmodel)
 
-print("------------ Positive match test ------------")
+print("\n------------ Positive match test ------------")
 positiveTestsCount = 0
 falseNegatives = 0
 for j in range(nb_classes):
@@ -379,9 +379,9 @@ for j in range(nb_classes):
         print((dist, result))
         if(result == False):
             falseNegatives += 1
-print("Test accuracy = ", 100-(falseNegatives/positiveTestsCount)*100, "%")
+print("\nTest accuracy = ", 100-(falseNegatives/positiveTestsCount)*100, "%")
 
-print("------------ Negative match test ------------")
+print("\n------------ Negative match test ------------")
 negativeTestsCount = 0
 falsePositives = 0
 for j in range(nb_classes):
@@ -391,9 +391,9 @@ for j in range(nb_classes):
         print((dist, result))
         if(result == True):
             falsePositives += 1
-print("Test accuracy = ", 100-(falsePositives/negativeTestsCount)*100, "%")
+print("\nTest accuracy = ", 100-(falsePositives/negativeTestsCount)*100, "%")
 
-print("------------ Final results ------------")
+print("\n------------ Final results ------------")
 totalTestsCount = positiveTestsCount + negativeTestsCount
 totalFalseFlags = falseNegatives + falsePositives
 print("Total accuracy = ", 100-(totalFalseFlags/totalTestsCount)*100, "%")
