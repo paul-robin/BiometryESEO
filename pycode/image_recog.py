@@ -375,7 +375,7 @@ falseNegatives = 0
 for j in range(nb_classes):
     for i in [1, 10, 15, 19]:
         positiveTestsCount += 1
-        dist, result = verify(dataPath + y_test[j]+'_'+str(i)+'.jpg', y_test[j-1], database, FRmodel)
+        dist, result = verify(dataPath + y_test[j]+'_'+str(i)+'.jpg', y_test[j], database, FRmodel)
         print((dist, result))
         if(result == False):
             falseNegatives += 1
