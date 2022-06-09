@@ -32,8 +32,7 @@ Enfin au fur et à mesure, notre IA arrivera à nous donner des résultats corre
 Notre IA ne sera pas entrainée à reconnaitre les images a partir d’un dataset  
 Elle sera entrainée à comparer des images entre elles grâce au dataset.  
 Avantage : pas d’obligation de réentraîner l’IA a chaque fois que des images entrent dans le dataset  
-Notre IA ne sera pas entrainée à reconnaitre les images a partir d’un dataset. Elle sera entrainée à comparer des images entre elles grâce au dataset.  
-L'avantage : pas d’obligation de réentraîner l’IA a chaque fois que des images entrent dans le dataset  
+
 
 
  
