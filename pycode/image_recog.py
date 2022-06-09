@@ -144,53 +144,6 @@ def get_batch_random(batch_size,s="train"):
     return triplets
 
 
-def get_batch_hard(draw_batch_size,hard_batchs_size,norm_batchs_size,network,s="train"):
-    """
-    Create batch of APN "hard" triplets
-    
-    Arguments:
-    draw_batch_size -- integer : number of initial randomly taken samples   
-    hard_batchs_size -- interger : select the number of hardest samples to keep
-    norm_batchs_size -- interger : number of random samples to add
-
-    Returns:
-    triplets -- list containing 3 tensors A,P,N of shape (hard_batchs_size+norm_batchs_size,w,h,c)
-    """
-    if s == 'train':
-        X = x_train
-    else:
-        X = x_test
-
-    m, w, h,c = X[0].shape
-    
-    
-    #Step 1 : pick a random batch to study
-    studybatch = get_batch_random(draw_batch_size,s)
-    
-    #Step 2 : compute the loss with current network : d(A,P)-d(A,N). The alpha parameter here is omited here since we want only to order them
-    studybatchloss = np.zeros((draw_batch_size))
-    
-    #Compute embeddings for anchors, positive and negatives
-    A = network.predict(studybatch[0])
-    P = network.predict(studybatch[1])
-    N = network.predict(studybatch[2])
-    
-    #Compute d(A,P)-d(A,N)
-    studybatchloss = np.sum(np.square(A-P),axis=1) - np.sum(np.square(A-N),axis=1)
-    
-    #Sort by distance (high distance first) and take the 
-    selection = np.argsort(studybatchloss)[::-1][:hard_batchs_size]
-    
-    #Draw other random samples from the batch
-    selection2 = np.random.choice(np.delete(np.arange(draw_batch_size),selection),norm_batchs_size,replace=False)
-    
-    selection = np.append(selection,selection2)
-    
-    triplets = [studybatch[0][selection,:,:,:], studybatch[1][selection,:,:,:], studybatch[2][selection,:,:,:]]
-    
-    return triplets
-
-
 def drawTriplets(tripletbatch, nbmax=None):
     """display the three images for each triplets in the batch
     """
@@ -209,10 +162,6 @@ def drawTriplets(tripletbatch, nbmax=None):
             axis("off")
             plt.imshow(tripletbatch[i][row,:,:,0],vmin=0, vmax=1,cmap='Greys')
             subplot.title.set_text(labels[i])
-
-
-def compute_dist(a,b):
-    return np.sum(np.square(a-b))
 
 
 #----------------------------------------------------------------#
@@ -283,17 +232,13 @@ network_train.load_weights("saved_weights.h5")
 
 #-----------------START TRAINING-----------------#
 triplets = get_batch_random(3)
-hardtriplets = get_batch_hard(50,1,1,FRmodel)
 
 print("Checking batch width, should be 3 : ",len(triplets))
 print("Shapes in the batch A:{0} P:{1} N:{2}".format(triplets[0].shape, triplets[1].shape, triplets[2].shape))
 drawTriplets(triplets)
 
-print("Shapes in the hardbatch A:{0} P:{1} N:{2}".format(hardtriplets[0].shape, hardtriplets[1].shape, hardtriplets[2].shape))
-drawTriplets(hardtriplets)
-
-evaluate_every = 50 # interval for evaluating on one-shot tasks
-batch_size = 50
+evaluate_every = 25 # interval for evaluating on one-shot tasks
+batch_size = 100
 n_iter = 1000 # No. of training iterations
 
 print("------------ Training process ------------")
