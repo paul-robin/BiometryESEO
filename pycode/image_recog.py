@@ -296,10 +296,10 @@ def verify(image_path, identity, database, model):
     
     # Step 3: Open the door if dist < 0.7, else don't open (≈ 3 lines)
     if dist < 0.7:
-        print("It's " + str(identity) + ", it's a match")
+        print("It's " + str(identity) + ", it's a match", end=" ")
         door_open = True
     else:
-        print("It's not " + str(identity) + ", fingerprint mismatch")
+        print("It's not " + str(identity) + ", fingerprint mismatch", end=" ")
         door_open = False
         
     return dist, door_open
@@ -332,7 +332,7 @@ plot_model(network_train,show_shapes=True, show_layer_names=True, to_file='02 mo
 print(network_train.metrics_names)
 
 n_iteration=0
-#network_train.load_weights('FVC-DB1_A_weights.h5')
+#network_train.load_weights("fv_DB1_A_weightes.h5")
 
 triplets = get_batch_random(3)
 hardtriplets = get_batch_hard(50,1,1,FRmodel)
@@ -344,9 +344,9 @@ drawTriplets(triplets)
 print("Shapes in the hardbatch A:{0} P:{1} N:{2}".format(hardtriplets[0].shape, hardtriplets[1].shape, hardtriplets[2].shape))
 drawTriplets(hardtriplets)
 
-evaluate_every = 5 # interval for evaluating on one-shot tasks
-batch_size = 10
-n_iter = 100 # No. of training iterations
+evaluate_every = 25 # interval for evaluating on one-shot tasks
+batch_size = 50
+n_iter = 500 # No. of training iterations
 #n_val = 250 # how many one-shot tasks to validate on
 
 print("Starting training process!")
@@ -355,11 +355,10 @@ print("-------------------------------------")
 t_start = time.time()
 dummy_target = [np.zeros((batch_size,15)) for i in range(3)]
 for i in range(1, n_iter+1):
-    triplets = get_batch_hard(200,16,16,FRmodel)
+    triplets = get_batch_random(3) # get_batch_hard(200,16,16,FRmodel)
     loss = network_train.train_on_batch(triplets, None)
     n_iteration += 1
     if i % evaluate_every == 0:
-        print("\n ------------- \n")
         print("[{3}] Time for {0} iterations: {1:.1f} mins, Train Loss: {2}".format(i, (time.time()-t_start)/60.0,loss,n_iteration))
         #probs,yprob = compute_probs(FRmodel,x_test_origin[:n_val,:,:,:],y_test_origin[:n_val])
         #fpr, tpr, thresholds, auc = compute_metrics(probs,yprob)
@@ -368,20 +367,34 @@ network_train.save_weights("fv_DB1_A_weightes.h5")
 
 database = {}
 for i in y_test:
-    database[i] = img_to_encoding(dataPath+i+'_2.bmp',FRmodel)
+    database[i] = img_to_encoding(dataPath+i+'_2.jpg',FRmodel)
 
+print("------------ Positive match test ------------")
+positiveTestsCount = 0
+falseNegatives = 0
 for j in range(nb_classes):
-    for i in [1,10]:
-        print(verify(dataPath + y_test[j]+'_'+str(i)+'.jpg', y_test[j], database, FRmodel))
+    for i in [1, 10, 15, 19]:
+        positiveTestsCount += 1
+        dist, result = verify(dataPath + y_test[j]+'_'+str(i)+'.jpg', y_test[j-1], database, FRmodel)
+        print((dist, result))
+        if(result == False):
+            falseNegatives += 1
+print("Test accuracy = ", 100-(falseNegatives/positiveTestsCount)*100, "%")
 
-accuracy = 100-(13/140)*100
-print (accuracy)
+print("------------ Negative match test ------------")
+negativeTestsCount = 0
+falsePositives = 0
+for j in range(nb_classes):
+    for i in [1, 10, 15, 19]:
+        negativeTestsCount += 1
+        dist, result = verify(dataPath + y_test[j]+'_'+str(i)+'.jpg', y_test[j-1], database, FRmodel)
+        print((dist, result))
+        if(result == True):
+            falsePositives += 1
+print("Test accuracy = ", 100-(falsePositives/negativeTestsCount)*100, "%")
 
-# for i in range(1,13):
-#     verify('./DB1_A/102_'+str(i)+'.bmp', y_test[2], database, FRmodel)
-
-# verify('./DB1_A/103_'+str(3)+'.bmp', y_test[3], database, FRmodel)
-
-# for i in range(1,13):
-#     verify('./DB1_A/119_'+str(i)+'.bmp', y_test[20], database, FRmodel)
+print("------------ Final results ------------")
+totalTestsCount = positiveTestsCount + negativeTestsCount
+totalFalseFlags = falseNegatives + falsePositives
+print("Total accuracy = ", 100-(totalFalseFlags/totalTestsCount)*100, "%")
 
