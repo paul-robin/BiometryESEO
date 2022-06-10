@@ -193,11 +193,11 @@ def verify(image_path, identity, database, model):
     
     # Step 3: Open the door if dist < 0.7, else don't open (≈ 3 lines)
     if dist < 0.7:
-        print("It's " + str(identity) + ", it's a match")
         door_open = True
+        print("It's " + str(identity) + ", it's a match", (dist, door_open))
     else:
-        print("It's not " + str(identity) + ", fingerprint mismatch")
         door_open = False
+        print("It's not " + str(identity) + ", fingerprint mismatch", (dist, door_open))
         
     return dist, door_open
 
@@ -278,7 +278,6 @@ for j in range(nb_classes):
     for i in range(1, 20, 2):
         positiveTestsCount += 1
         dist, result = verify(dataPath + y_test[j]+'_'+str(i)+'.jpg', y_test[j], database, FRmodel)
-        print((dist, result))
         if(result == False):
             falseNegatives += 1
 
@@ -289,7 +288,6 @@ for j in range(nb_classes):
     for i in range(1, 20, 2):
         negativeTestsCount += 1
         dist, result = verify(dataPath + y_test[j]+'_'+str(i)+'.jpg', y_test[j-1], database, FRmodel)
-        print((dist, result))
         if(result == True):
             falsePositives += 1
 

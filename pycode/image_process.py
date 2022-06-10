@@ -71,6 +71,7 @@ create_dataset()
 
 
 # Auth process + test
+print("\n------------ Auth test ------------")
 for file in filesToAuth:
     process(file, os.getcwd() + "\\tmp_authenticate")
     auth_main(os.getcwd() + "\\tmp_authenticate\\" + file)
