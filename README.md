@@ -181,3 +181,5 @@ Cette couche permet de soustraire 2 entrées. Elle prend en entrée une liste de
 - [Biométrie par signaux psychologiques](https://tel.archives-ouvertes.fr/tel-00778089/document)
 
 - [Identification des personnes par fusion de différentes modalités biométriques (2014)](https://hal.archives-ouvertes.fr/tel-01206294/document)
+
+- [Neural Fuzzy Extractors: A Secure Way to Use Artificial Neural Networks for Biometric User Authentication](https://arxiv.org/pdf/2003.08433.pdf)
