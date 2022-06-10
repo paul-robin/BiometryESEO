@@ -1,5 +1,7 @@
 from tensorflow.python.client import device_lib
 import os
+from os import listdir
+from os.path import isfile, join
 import time
 import numpy as np
 np.random.seed(0)
@@ -200,6 +202,15 @@ def verify(image_path, identity, database, model):
     return dist, door_open
 
 
+def auth_main(imgPath):
+    authPath = os.getcwd() + "\\auth_mains"
+
+    for j in range(nb_classes):
+        _, check = verify(imgPath, y_test[j], database, FRmodel)
+        if(check == True):
+            break
+
+
 #----------------------------------------------------------------#
 
 
@@ -289,4 +300,3 @@ totalFalseFlags = falseNegatives + falsePositives
 print("Positive match test accuracy = ", 100-(falseNegatives/positiveTestsCount)*100, "%")
 print("Negative match test accuracy = ", 100-(falsePositives/negativeTestsCount)*100, "%")
 print("Total accuracy = ", 100-(totalFalseFlags/totalTestsCount)*100, "%")
-
