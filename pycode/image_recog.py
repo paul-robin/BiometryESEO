@@ -206,8 +206,8 @@ def auth_main(imgPath):
     for j in range(nb_classes):
         _, check = verify(imgPath, y_test[j], database, FRmodel)
         if(check == True):
+            print("Authorized")
             break
-    print("Unauthorized")
 
 #----------------------------------------------------------------#
 
