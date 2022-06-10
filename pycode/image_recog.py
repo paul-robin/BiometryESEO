@@ -218,13 +218,12 @@ def auth_main(imgToAuth, model):
         if dist < 0.5:
             door_open = True
             print("It's " + str(file.strip('.jpg')) + ", it's a match", (dist, door_open))
-            os.remove(imgToAuth)
+            print('Authorized')
             break
         else:
             door_open = False
             print("It's not " + str(file.strip('.jpg')) + ", fingerprint mismatch", (dist, door_open))
-
-    print("Not recognized")
+    
     os.remove(imgToAuth)
 
 #----------------------------------------------------------------#
