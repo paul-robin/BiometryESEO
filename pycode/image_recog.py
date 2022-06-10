@@ -193,23 +193,21 @@ def verify(image_path, identity, database, model):
     
     # Step 3: Open the door if dist < 0.7, else don't open (≈ 3 lines)
     if dist < 0.7:
-        print("It's " + str(identity) + ", it's a match", end=" ")
+        print("It's " + str(identity) + ", it's a match")
         door_open = True
     else:
-        print("It's not " + str(identity) + ", fingerprint mismatch", end=" ")
+        print("It's not " + str(identity) + ", fingerprint mismatch")
         door_open = False
         
     return dist, door_open
 
 
 def auth_main(imgPath):
-    authPath = os.getcwd() + "\\auth_mains"
-
     for j in range(nb_classes):
         _, check = verify(imgPath, y_test[j], database, FRmodel)
         if(check == True):
             break
-
+    print("Unauthorized")
 
 #----------------------------------------------------------------#
 
@@ -242,7 +240,7 @@ network_train.load_weights("saved_weights.h5")
 
 
 #-----------------START TRAINING-----------------#
-triplets = get_batch_random(3)
+""" triplets = get_batch_random(3)
 
 print("Checking batch width, should be 3 : ",len(triplets))
 print("Shapes in the batch A:{0} P:{1} N:{2}".format(triplets[0].shape, triplets[1].shape, triplets[2].shape))
@@ -263,7 +261,7 @@ for i in range(1, n_iter+1):
     if i % evaluate_every == 0:
         print("[{3}] Time for {0} iterations: {1:.1f} mins, Train Loss: {2}".format(i, (time.time()-t_start)/60.0,loss,n_iteration))
 
-network_train.save_weights("saved_weights.h5")
+network_train.save_weights("saved_weights.h5") """
 #-----------------END TRAINING-----------------#
 
 
@@ -271,7 +269,9 @@ database = {}
 for i in y_test:
     database[i] = img_to_encoding(dataPath+i+'_2.jpg',FRmodel)
 
-print("\n------------ Positive match test ------------")
+
+#-----------------START VALIDATION-----------------#
+""" print("\n------------ Positive match test ------------")
 positiveTestsCount = 0
 falseNegatives = 0
 for j in range(nb_classes):
@@ -299,4 +299,5 @@ totalFalseFlags = falseNegatives + falsePositives
 
 print("Positive match test accuracy = ", 100-(falseNegatives/positiveTestsCount)*100, "%")
 print("Negative match test accuracy = ", 100-(falsePositives/negativeTestsCount)*100, "%")
-print("Total accuracy = ", 100-(totalFalseFlags/totalTestsCount)*100, "%")
+print("Total accuracy = ", 100-(totalFalseFlags/totalTestsCount)*100, "%") """
+#-----------------END VALIDATION-----------------#
