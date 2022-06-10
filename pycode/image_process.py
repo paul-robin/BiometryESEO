@@ -4,8 +4,7 @@ from os import listdir
 from os.path import isfile, join
 import numpy as np
 from random import random
-from image_recog import verify
-from py.image_recog import auth_main()
+from image_recog import auth_main
 
 def process_mains(img, finalPath):
     authPath = os.getcwd() + "\\auth_mains"
