@@ -4,7 +4,7 @@ from os import listdir
 from os.path import isfile, join
 import numpy as np
 from random import random
-from image_recog import auth_main
+from image_recog import *
 
 def process(file, finalPath):
     img = cv2.imread(basePath + '\\' + file)
@@ -74,4 +74,4 @@ create_dataset() """
 print("\n------------ Auth test ------------")
 for file in filesToAuth:
     process(file, os.getcwd() + "\\tmp_authenticate")
-    auth_main(os.getcwd() + "\\tmp_authenticate\\" + file)
+    auth_main(os.getcwd() + "\\tmp_authenticate\\" + file, FRmodel)
