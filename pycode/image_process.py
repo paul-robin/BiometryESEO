@@ -65,9 +65,9 @@ filesToAuth = [f for f in listdir(todoPath) if isfile(join(todoPath, f))]
 
 
 # Dataset setup
-# for file in files:
-#     process(file, os.getcwd() + "\\processed")
-# create_dataset()
+for file in files:
+    process(file, os.getcwd() + "\\processed")
+create_dataset()
 
 
 # Auth process + test

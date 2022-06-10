@@ -240,7 +240,7 @@ network_train.load_weights("saved_weights.h5")
 
 
 #-----------------START TRAINING-----------------#
-""" triplets = get_batch_random(3)
+triplets = get_batch_random(3)
 
 print("Checking batch width, should be 3 : ",len(triplets))
 print("Shapes in the batch A:{0} P:{1} N:{2}".format(triplets[0].shape, triplets[1].shape, triplets[2].shape))
@@ -261,7 +261,7 @@ for i in range(1, n_iter+1):
     if i % evaluate_every == 0:
         print("[{3}] Time for {0} iterations: {1:.1f} mins, Train Loss: {2}".format(i, (time.time()-t_start)/60.0,loss,n_iteration))
 
-network_train.save_weights("saved_weights.h5") """
+network_train.save_weights("saved_weights.h5")
 #-----------------END TRAINING-----------------#
 
 
@@ -271,7 +271,7 @@ for i in y_test:
 
 
 #-----------------START VALIDATION-----------------#
-""" print("\n------------ Positive match test ------------")
+print("\n------------ Positive match test ------------")
 positiveTestsCount = 0
 falseNegatives = 0
 for j in range(nb_classes):
@@ -299,5 +299,5 @@ totalFalseFlags = falseNegatives + falsePositives
 
 print("Positive match test accuracy = ", 100-(falseNegatives/positiveTestsCount)*100, "%")
 print("Negative match test accuracy = ", 100-(falsePositives/negativeTestsCount)*100, "%")
-print("Total accuracy = ", 100-(totalFalseFlags/totalTestsCount)*100, "%") """
+print("Total accuracy = ", 100-(totalFalseFlags/totalTestsCount)*100, "%")
 #-----------------END VALIDATION-----------------#
