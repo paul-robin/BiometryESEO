@@ -183,3 +183,4 @@ Cette couche permet de soustraire 2 entrées. Elle prend en entrée une liste de
 - [Identification des personnes par fusion de différentes modalités biométriques (2014)](https://hal.archives-ouvertes.fr/tel-01206294/document)
 
 - [Neural Fuzzy Extractors: A Secure Way to Use Artificial Neural Networks for Biometric User Authentication](https://arxiv.org/pdf/2003.08433.pdf)
+- [Convolutional Neural Networks (CNNs) Tutorial with Python](https://pub.towardsai.net/convolutional-neural-networks-cnns-tutorial-with-python-417c29f0403f)
